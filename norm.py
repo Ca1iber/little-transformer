@@ -1,5 +1,7 @@
 import torch
 import torch.nn as nn
+import torch.nn.functional as F
+
 
 '''
     normalize the input to make the value stable
@@ -34,7 +36,15 @@ class LayerNorm(nn.Module):
         x = x * self.gamma + self.beta
         return x
 
-
+        '''
+        return F.layer_norm(
+            x,
+            normalized_shape=self.gamma.shape,
+            weight=self.gamma,
+            bias=self.beta,
+            eps=self.epsilon,
+        )
+        '''
 
 
 
